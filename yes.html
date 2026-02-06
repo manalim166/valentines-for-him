@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>You’re My Valentine ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 50px 70px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      animation: popIn 1.5s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      color: #c9184a;
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+
+    .hearts {
+      color: #ff4d6d;
+      font-size: 28px;
+      margin-left: 8px;
+      margin-right: 8px;
+      display: inline-block;
+      animation: float 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    p {
+      font-size: 22px;
+      color: #4a1c2b;
+      line-height: 1.6;
+      margin-top: 25px;
+    }
+
+    /* Photo styling */
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: photoPop 1.5s ease;
+    }
+
+    @keyframes photoPop {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Fancy I LOVE YOU line */
+    .love-you {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 42px;
+      background: linear-gradient(90deg, #ff4d6d, #ff99c8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 35px;
+      animation: heartBeat 1s ease infinite alternate;
+    }
+
+    @keyframes heartBeat {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    .heart-bg {
+      position: absolute;
+      bottom: -20px;
+      color: rgba(255, 77, 109, 0.5);
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>
+      Happy Valentine’s Day 
+      <span class="hearts">❤️</span>
+      <span class="hearts">💖</span>
+      <span class="hearts">💘</span>
+    </h1>
+
+    <!-- Your photo -->
+    <img src="myphoto.jpg" alt="Our Photo" class="photo">
+
+    <p>
+      Congratulations! You are officially, proudly, and forever<br>
+      the Valentine of <strong>Manali Mane</strong> 💕
+    </p>
+
+    <!-- Fancy I LOVE YOU -->
+    <div class="love-you">I LOVE YOU</div>
+  </div>
+
+  <script>
+    // Floating hearts in the background
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart-bg";
+      const heartTypes = ["❤️","💖","💘","💕"];
+      heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
