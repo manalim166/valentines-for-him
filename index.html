@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Valentine’s Day ❤️</title>
 
   <style>
@@ -9,11 +10,10 @@
       margin: 0;
       min-height: 100vh;
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
       font-family: 'Georgia', serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 40px 20px;
     }
 
     .card {
@@ -26,6 +26,7 @@
       animation: fadeIn 2s ease;
       position: relative;
       z-index: 2;
+      margin: 40px auto;
     }
 
     @keyframes fadeIn {
@@ -76,15 +77,17 @@
       color: white;
       position: absolute;
       left: 55%;
+      top: 0;
     }
 
     .heart {
-      position: absolute;
+      position: fixed;
       bottom: -20px;
       color: rgba(255, 77, 109, 0.6);
       font-size: 20px;
       animation: floatUp 8s linear infinite;
       z-index: 1;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
@@ -99,6 +102,21 @@
     @keyframes fadeOut {
       to { opacity: 0; transform: scale(0.95); }
     }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .question {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 
@@ -112,15 +130,15 @@
     </p>
 
     <p>
-      You’ve seen me at my strongest and at my most fragile, and you’ve loved me through all of it without hesitation. You hold me when words fail, you steady me when I feel unsure, and you remind me—every single day—that I’m never alone. Your love feels like home: safe, warm, and constant, even when the world feels overwhelming.
+      You’ve seen me at my strongest and at my most fragile, and you’ve loved me through all of it without hesitation. You hold me when words fail, you steady me when I feel unsure, and you remind me—every single day—that I’m never alone. Your love feels like home: safe, warm, and constant.
     </p>
 
     <p>
-      I’m so proud of the life we’re building together. The quiet moments, the laughter, the hard days we’ve survived, and the dreams we’re still chasing—they all mean more to me because they’re shared with you. You make ordinary days meaningful and difficult days bearable just by being you.
+      I’m so proud of the life we’re building together. The quiet moments, the laughter, the hard days we’ve survived, and the dreams we’re still chasing—they all mean more to me because they’re shared with you.
     </p>
 
     <p>
-      Thank you for choosing me, for standing beside me, and for loving me so deeply and genuinely. I don’t take a single part of you or us for granted. I would choose you again and again, in every lifetime, without question. You are my heart, my partner, my forever. Happy Valentine’s Day—now and always, you are my greatest love.
+      Thank you for choosing me. I would choose you again and again, in every lifetime, without question. You are my heart, my partner, my forever.
     </p>
 
     <p>
@@ -136,14 +154,25 @@
   </div>
 
   <script>
-    // Make "No" button dodge
     const noBtn = document.getElementById("no");
-    noBtn.addEventListener("mouseover", () => {
-      noBtn.style.left = Math.random() * 250 + "px";
-      noBtn.style.top = Math.random() * 40 + "px";
+
+    function moveNoButton() {
+      const maxX = 250;
+      const maxY = 40;
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
+    }
+
+    // Works on desktop
+    noBtn.addEventListener("mouseover", moveNoButton);
+
+    // Works on mobile (touch)
+    noBtn.addEventListener("touchstart", function(e) {
+      e.preventDefault();
+      moveNoButton();
     });
 
-    // Floating hearts
+    // Floating hearts (optimized)
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -154,9 +183,9 @@
 
       setTimeout(() => heart.remove(), 8000);
     }
-    setInterval(createHeart, 500);
 
-    // Animated transition to next page
+    setInterval(createHeart, 800);
+
     function goNext() {
       document.getElementById("card").classList.add("fade-out");
       setTimeout(() => {
